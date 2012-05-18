@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
 
   # jezeli haslo bedzie krotsze niz 6 znakow, to dodatkowo devise dorzuci swoj alert
   validates :password, :presence => true, :confirmation => true, :length => { :in => 8..32 }
-  validates_format_of :password, :with => /(\D*[a-z]){2,}/, :message => "At least two small characters"
-  validates_format_of :password, :with => /(\D*[A-Z]){2,}/, :message => "At least two big characters"
-  validates_format_of :password, :with => /(\D*\d){2,}/, :message => "At least two digits"
-  validates_format_of :password, :with => /(\D*[@\$=!:.#%]){2,}/, :message => "At least two special characters"
+  validates_format_of :password, :with => /(\S*[a-z]){2,}/, :message => "At least two small characters"
+  validates_format_of :password, :with => /(\S*[A-Z]){2,}/, :message => "At least two big characters"
+  validates_format_of :password, :with => /(\S*\d){2,}/, :message => "At least two digits"
+  validates_format_of :password, :with => /(\S*[@\$!#%]){2,}/, :message => "At least two special characters"
   validate :unique_password
 
   private

@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   validates_format_of :password, :with => /(\S*[@\$!#%]){2,}/, :message => "At least two special characters"
   validate :unique_password
 
+  def password_expired?
+    self.password_updated_at<= DateTime.now # + PASSWD_EXPIRATION.days 
+  end
+
   private
     def unique_password
       #passwords = ["aaBB12!@"]
@@ -23,4 +27,5 @@ class User < ActiveRecord::Base
         errors.add(:password, "Y22ou used that password in the past")
       end
     end
+
 end

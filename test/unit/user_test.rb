@@ -8,7 +8,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should validation pass with password meeting guidelines" do
-     @user.password = "aaBB12!@PASSWORD"
+     @user.password = "a!aBB1PAs2sW@ORD"
      assert @user.valid?
   end
 

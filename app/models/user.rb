@@ -16,10 +16,11 @@ class User < ActiveRecord::Base
 
   private
     def unique_password
-      if true
-
+      #passwords = ["aaBB12!@"]
+      if true#passwords.include? password
+        #errors.add(:password, "You used that password in the past")
       else
-        errors.add(:password, "You used that password in the past")
+        errors.add(:password, "Y22ou used that password in the past")
       end
     end
 end

@@ -17,12 +17,12 @@ class PasswordsController < ApplicationController
         sign_in @user, :bypass => true
         redirect_to root_path
       else
-        flash[:errors] = @user.errors
+        @errors = @user.errors
         render "edit", :locals => { :user => @user }
       end
     else
       @user.errors.add(:password, 'Old password is incorrect')
-      flash[:errors] = @user.errors
+      @errors = @user.errors
       render "edit", :locals => { :user => @user }
     end
   end

@@ -6,7 +6,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :encrypted_password, :null => false, :default => ""
 
       ## Password expirable
-      t.datetime :password_updated_at, :null => false, :default => DateTime.now
+      t.datetime :password_updated_at, :null => false
       t.boolean  :password_expired, :default => 0
 
       ## Recoverable

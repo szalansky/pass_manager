@@ -3,8 +3,9 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   attr_accessible :email, :remember_me, :password_expired, :password, :password_confirmation
+  has_many :passwords
 
-  before_create :save_password
+  before_create :store_password
 
   # jezeli haslo bedzie krotsze niz 6 znakow, to dodatkowo devise dorzuci swoj alert
   validates :password, :presence => true, :length => { :in => 8..32 }
@@ -17,21 +18,23 @@ class User < ActiveRecord::Base
   def password_expired?
     #self.password_updated_at + PASSWD_EXPIRATION.days <= DateTime.now 
     self.password_updated_at + 1.minutes <= DateTime.now
-    # ZAKTUALIZUJ FLAGE password_expired ALE TO CHYBA NIE BEDZIE KONIECZNE
   end
 
   protected
     def unique_password
-      #passwords = ["aaBB12!@"]
-      if true#passwords.include? password
-        #errors.add(:password, "You used that password in the past")
-      else
+      if password_used?
         errors.add(:password, "You used that password in the past")
       end
     end
 
-    def save_password
+    def password_used?
+      true unless passwords.where("value = ?", self.password).order("`created_at` DESC").limit(5).empty?
+    end
+
+    def store_password
       self.password_updated_at = DateTime.now
+      password = Password.new(:value => self.password)
+      self.passwords << password
     end
 
 end

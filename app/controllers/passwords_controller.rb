@@ -12,7 +12,7 @@ class PasswordsController < ApplicationController
     if @user.valid_password?(params[:old_password])
       @user.password_updated_at = DateTime.now
       if @user.update_attributes(params[:user])
-        store_password @user
+        Password.store_password @user
         flash[:notice] = "Password has been updated"
         sign_in @user, :bypass => true
         redirect_to root_path
@@ -27,12 +27,4 @@ class PasswordsController < ApplicationController
     end
   end
 
-  private
-    def store_password(user)
-      p = Password.new
-      p.user = user
-      p.value = user.password
-      p.created_at = user.password_updated_at
-      p.save
-    end
 end

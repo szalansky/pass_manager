@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   protected
     def unique_password
       if password_used?
-        errors.add(:password, "t")
+        errors.add(:password, "You used that password in the past")
       end
     end
 

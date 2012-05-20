@@ -11,3 +11,93 @@
  *= require_self
  *= require_tree .
 */
+
+#bar {
+  float: right;
+  padding-right: 10px;
+}
+
+#container {
+  background: #F0F0F0;
+  display: block;
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  width: 380px;
+  height: 100px;
+  padding-top: 10px;
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#container h1 {
+  text-align: center;
+  vertical-align: middle;
+}
+
+#devise_container {
+  background: #F0F0F0;
+  display: block;
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  width: 380px;
+  padding-bottom: 25px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#devise_container h2 {
+  text-align: center;
+  vertical-align: middle;
+}
+
+#devise_password_container {
+  background: #F0F0F0;
+  display: block;
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  width: 380px;
+  padding-bottom: 25px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#devise_password_container h2 {
+  text-align: center;
+  vertical-align: middle;
+}
+
+#error_explanation {
+  font-size: 0.8em;
+  color: #700000;
+}
+
+#error_explanation p {
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+#error_explanation h2 {
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: 0.8em;
+  padding-bottom: 10px;
+}
+
+#error_explanation ul li {
+  padding-left: 10px;
+}
+
+.form_input {
+  text-align: center;
+}
+
+.form_input input[type=submit] {
+  color: #fff;
+}

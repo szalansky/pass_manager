@@ -18,13 +18,13 @@ class PasswordsController < ApplicationController
         redirect_to root_path
       else
         #@errors = @user.errors
-        flash[:errors] = @user.errors.messages
+        flash[:errors] = @user.errors.messages[:password]
         render "edit", :locals => { :user => @user }
       end
     else
       @user.errors.add(:password, 'Old password is incorrect')
       #@errors = @user.errors
-      flash[:errors] = @user.errors.messages
+      flash[:errors] = @user.errors.messages[:password]
       render "edit", :locals => { :user => @user }
     end
   end

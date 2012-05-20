@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
-  fixtures :users, :passwords
+  fixtures :users
   
   def setup
     @user = User.new
@@ -51,7 +51,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should validation fail with password listed as used" do
-    @existing_user.password = "kkBB12!@"
+    @existing_user.password = "aaBB12!@"
     assert !@existing_user.valid?
   end
 end

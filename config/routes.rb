@@ -1,9 +1,10 @@
 PassManager::Application.routes.draw do
 
-  devise_for :users, :path => 'user'#, :controllers => { :passwords => "passwords" }
+  devise_for :users, :path => 'user'
 
   match "/user/change_password", :to => "passwords#edit", :via => :get, :as => "edit_password"
   match "/user/change_password", :to => "passwords#update", :via => :put, :as => "update_password"
+  match "/hello", :to => "hello#say_hello", :via => :get, :as => "say_hello"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

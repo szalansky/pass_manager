@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   def password_expired?
     #self.password_updated_at + PASSWD_EXPIRATION.days <= DateTime.now 
-    self.password_updated_at + 1.minutes <= DateTime.now
+    self.password_updated_at + 2.minutes <= DateTime.now
   end
 
   protected
@@ -28,7 +28,8 @@ class User < ActiveRecord::Base
     end
 
     def password_used?
-      true unless passwords.where("value = ?", self.password).order("`created_at` DESC").limit(5).empty?
+      #puts self.password + "\n\n\n"
+      true if passwords.order("`created_at` DESC").limit(3).any? { |p| p.value == self.password }
     end
 
     def store_password

@@ -16,8 +16,7 @@ class User < ActiveRecord::Base
   validate :unique_password
 
   def password_expired?
-    #self.password_updated_at + PASSWD_EXPIRATION.days <= DateTime.now 
-    self.password_updated_at + 2.minutes <= DateTime.now
+    self.password_updated_at + PASSWD_EXPIRATION.days <= DateTime.now 
   end
 
   protected
@@ -28,13 +27,13 @@ class User < ActiveRecord::Base
     end
 
     def password_used?
-      #puts self.password + "\n\n\n"
-      true if passwords.order("`created_at` DESC").limit(3).any? { |p| p.value == self.password }
+      encrypted = (Digest::SHA1.new << self.password).to_s
+      true if passwords.order("`created_at` DESC").limit(10).any? { |p| p.value == encrypted }
     end
 
     def store_password
       self.password_updated_at = DateTime.now
-      password = Password.new(:value => self.password)
+      password = Password.new(:value => (Digest::SHA1.new << self.password).to_s)
       self.passwords << password
     end
 
